@@ -56,12 +56,12 @@ public class DailyPurchaseReport extends JFrame implements ActionListener
 
    	model.addColumn("S_ID");
    	model.addColumn("S_NAME");
-  	model.addColumn("M_BNO");
-  	model.addColumn("M_NAME");
-  	model.addColumn("M_EXPDATE");
-  	model.addColumn("M_QTY");
-  	model.addColumn("M_PURPRICE");
-  	model.addColumn("M_SALEPRICE");
+  	model.addColumn("I_BNO");
+  	model.addColumn("I_NAME");
+  	model.addColumn("I_EXPDATE");
+  	model.addColumn("I_QTY");
+  	model.addColumn("I_PURPRICE");
+  	model.addColumn("I_SALEPRICE");
 
     jf.setTitle("Daily Purchase Report");
     jf.setSize(900,700);

@@ -1,0 +1,9 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="IwakInventory:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/IwakInventory_jar</output-path>
+    <root id="archive" name="IwakInventory.jar">
+      <element id="module-output" name="IwakInventory" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/mysql/mysql-connector-java/5.1.40/mysql-connector-java-5.1.40.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>

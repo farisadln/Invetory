@@ -17,9 +17,7 @@ public class MainMenu extends JFrame implements ActionListener
 		gbl=new GridBagLayout();
 		jf.setLayout(gbl);
 
-		l1=new JLabel("WELCOME TO IWAK INVENTORY SYSTEM");
-		l1.setFont(new Font("Times New Roman",Font.BOLD,20));
-		jf.add(l1);
+
 
 		mbar = new JMenuBar();
 		jf.setJMenuBar(mbar);

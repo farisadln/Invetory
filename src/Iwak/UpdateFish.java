@@ -219,18 +219,18 @@ l10.setBounds(470,220,200,25);
         jf.add(scrlPane);
         tabGrid.setFont(new Font ("Times New Roman",0,15));
 
-        model.addColumn("M_BNO");
-        model.addColumn("M_NAME");
-        model.addColumn("M_COMPANY");
-        model.addColumn("M_QUANTITY");
-        model.addColumn("M_EXPDATE");
-        model.addColumn("M_PURDATE");
-        model.addColumn("M_TYPE");
-        model.addColumn("M_SALEPRICE");
-        model.addColumn("M_PURPRICE");
-        model.addColumn("M_RACKNO");
-        model.addColumn("M_SID");
-        model.addColumn("M_SNAME");
+        model.addColumn("I_BNO");
+        model.addColumn("I_NAME");
+        model.addColumn("I_COMPANY");
+        model.addColumn("I_QUANTITY");
+        model.addColumn("I_EXPDATE");
+        model.addColumn("I_PURDATE");
+        model.addColumn("I_TYPE");
+        model.addColumn("I_SALEPRICE");
+        model.addColumn("I_PURPRICE");
+        model.addColumn("I_RACKNO");
+        model.addColumn("I_SID");
+        model.addColumn("I_SNAME");
 
 
 	     jf.setTitle("Update Fish ");
