@@ -1,4 +1,9 @@
 package Iwak;
+import hewan.Asin;
+import hewan.Ikan;
+import hewan.Payau;
+import hewan.Tawar;
+
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
@@ -32,6 +37,7 @@ public class AddNewFish extends JFrame implements ActionListener
 
 	AddNewFish()
 	{
+
 		jf=new JFrame();
 		f = new Font("Times New Roman",Font.BOLD,15);
 		jf.setLayout(null);
@@ -78,7 +84,7 @@ public class AddNewFish extends JFrame implements ActionListener
 		t4.setBounds(250,220,100,25);t4.setToolTipText("Enter fish quantity");
 		jf.add(t4);
 
-		l5= new JLabel("Med expiry date*");
+		l5= new JLabel("Fish expiry date*");
 		//l5.setFont(f);
     l5.setBounds(50,260,250,25);
 		jf.add(l5);
@@ -87,7 +93,7 @@ public class AddNewFish extends JFrame implements ActionListener
 		t5.setBounds(250,260,100,25);t5.setToolTipText("Enter fish expiry date");
 		jf.add(t5);
 
-		l6= new JLabel("Med purchase date*");
+		l6= new JLabel("Fish purchase date*");
 		//l6.setFont(f);
     l6.setBounds(50,300,260,25);
     	jf.add(l6);
@@ -104,14 +110,33 @@ public class AddNewFish extends JFrame implements ActionListener
 
 		l7 = new JLabel("fish type*");
 		//l7.setFont(f);
-   l7.setBounds(470,100,200,25);
+		l7.setBounds(470,100,200,25);
     	jf.add(l7);
 
+
+
+		Ikan ik = new Ikan();
+		Asin as = new Asin();
+		Payau py = new Payau();
+		Tawar tw = new Tawar();
+		Hewan hw = new Hewan();
+
+
+
+
         tabtype=new JComboBox();
-        tabtype.addItem("--type--");
-		tabtype.addItem("Sea Food");
-		tabtype.addItem("Fresh Fish");
-		tabtype.addItem("Brackish Fisg");
+		tabtype.addItem("---TYPE---");
+
+        as.setNama("Ikan Asin");
+        tabtype.addItem(hw.showNama());
+
+
+		tw.setNama("Ikan Tawar");
+		tabtype.addItem(py.showNama());
+
+		py.setNama("Ikan Payau");
+		tabtype.addItem(py.showNama());
+
 		tabtype.setBounds(720,100,100,25);tabtype.setToolTipText("Select fish type");
 		jf.add(tabtype);
 		tabtype.addActionListener(new ActionListener()
@@ -171,7 +196,7 @@ public class AddNewFish extends JFrame implements ActionListener
 			Class.forName("com.mysql.jdbc.Driver");
 		    con=DriverManager.getConnection("jdbc:mysql://localhost:3306/iwak_store","root","root");
 			System.out.println("Connected to database.");
-			 ps=con.prepareStatement("select sname from supplier");
+			ps=con.prepareStatement("select sname from supplier");
 		    rs=ps.executeQuery();
     		while(rs.next())
     		{
@@ -206,18 +231,18 @@ public class AddNewFish extends JFrame implements ActionListener
         jf.add(scrlPane);
         tabGrid.setFont(new Font ("Times New Roman",0,15));
 
-        model.addColumn("M_BNO");
-        model.addColumn("M_NAME");
-        model.addColumn("M_COMPANY");
-        model.addColumn("M_QUANTITY");
-        model.addColumn("M_EXPDATE");
-        model.addColumn("M_PURDATE");
-        model.addColumn("M_TYPE");
-        model.addColumn("M_SALEPRICE");
-        model.addColumn("M_PURPRICE");
-        model.addColumn("M_RACKNO");
-        model.addColumn("M_SID");
-        model.addColumn("M_SNAME");
+        model.addColumn("F_BNO");
+        model.addColumn("F_NAME");
+        model.addColumn("F_COMPANY");
+        model.addColumn("F_QUANTITY");
+        model.addColumn("F_EXPDATE");
+        model.addColumn("F_PURDATE");
+        model.addColumn("F_TYPE");
+        model.addColumn("F_SALEPRICE");
+        model.addColumn("F_PURPRICE");
+        model.addColumn("F_RACKNO");
+        model.addColumn("F_SID");
+        model.addColumn("F_SNAME");
 
 	     jf.setTitle("Add New Fish ");
 	     jf.setSize(900,700);
@@ -259,7 +284,8 @@ public class AddNewFish extends JFrame implements ActionListener
     		  {
     		  	 sid1=rs.getString(1);
     	      }
- ps=con.prepareStatement("insert into fish (mbno,mname,mcompany,mqty,mexpdate,mpurdate,mtype,mpurprice,msaleprice,mrackno,sid,sname)values(?,?,?,?,?,?,?,?,?,?,?,?)");
+
+    		  ps=con.prepareStatement("insert into fish (mbno,mname,mcompany,mqty,mexpdate,mpurdate,mtype,mpurprice,msaleprice,mrackno,sid,sname)values(?,?,?,?,?,?,?,?,?,?,?,?)");
 
             ps.setString(1,t1.getText());
 		    ps.setString(2,t2.getText());
@@ -274,15 +300,20 @@ public class AddNewFish extends JFrame implements ActionListener
 		    ps.setInt(11,Integer.parseInt(sid1));
 		    ps.setString(12,s);
 		  	ps.executeUpdate();
+		  	//show
+                    int r = 0;
+                    stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_UPDATABLE);
+                    rs = stmt.executeQuery("SELECT * from fish" );
+                    while(rs.next())
+                    {
+                        model.insertRow(r++, new Object[]{rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6),rs.getString(7),rs.getString(8),rs.getString(9),rs.getString(10),rs.getString(11),rs.getString(12) });
+                    }
+
 
   int reply=JOptionPane.showConfirmDialog(null,"Fish added successfully.Do you want add more Fish?","Added Fish",JOptionPane.YES_NO_OPTION);
 
-	             if (reply == JOptionPane.YES_OPTION)
-	   			{
-	   		       jf.setVisible(false);
-	   		       new AddNewFish();
-	   		    }
-	   		  else if (reply == JOptionPane.NO_OPTION)
+
+	   		  if (reply == JOptionPane.NO_OPTION)
 	   			{
 	   			  jf.setVisible(false);
 		        }

@@ -333,7 +333,8 @@ String str1="UPDATE fish SET mbno='"+t1.getText()+"',mname='"+t2.getText()+"',mc
     	t11.setText("");
     	t12.setText("");
     	con.close();
-       }
+    	//show
+			}
    }
    catch(SQLException se)
    {

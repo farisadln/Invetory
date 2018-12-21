@@ -44,7 +44,7 @@ l1.setBounds(50,100,200,25);
 
 		l2 = new JLabel("Fish name*");
 		//l2.setFont(f);
-  l2.setBounds(50,140,200,25);
+        l2.setBounds(50,140,200,25);
 		jf.add(l2);
 
     	t2 = new JTextField(20);
@@ -53,7 +53,7 @@ l1.setBounds(50,100,200,25);
 
 		l3 = new JLabel("Fish company");
 		//l3.setFont(f);
-  l3.setBounds(50,180,200,25);
+        l3.setBounds(50,180,200,25);
 		jf.add(l3);
 
      	t3 = new JTextField(20);
@@ -62,7 +62,7 @@ l1.setBounds(50,100,200,25);
 
 		l4 = new JLabel("Fish quantity");
 		//l4.setFont(f);
-l4.setBounds(50,220,200,25);
+        l4.setBounds(50,220,200,25);
     	jf.add(l4);
 
         t4= new JTextField(20);
@@ -71,7 +71,7 @@ l4.setBounds(50,220,200,25);
 
 		l5= new JLabel("Med expiry date");
 		//l5.setFont(f);
-l5.setBounds(50,260,250,25);
+        l5.setBounds(50,260,250,25);
 		jf.add(l5);
 
 	    t5= new JTextField(20);
@@ -80,7 +80,7 @@ l5.setBounds(50,260,250,25);
 
 		l6= new JLabel("Med purchase date");
 		//l6.setFont(f);
-    l6.setBounds(50,300,250,25);
+        l6.setBounds(50,300,250,25);
     	jf.add(l6);
 
         t6= new JTextField(20);
@@ -89,7 +89,7 @@ l5.setBounds(50,260,250,25);
 
 		l7 = new JLabel("Fish type");
 		//l7.setFont(f);
-    l7.setBounds(470,100,200,25);
+        l7.setBounds(470,100,200,25);
     	jf.add(l7);
 
         t7 = new JTextField(20);
@@ -98,7 +98,7 @@ l5.setBounds(50,260,250,25);
 
 		l8= new JLabel("Fish purchase price");
 		//l8.setFont(f);
-    l8.setBounds(470,140,220,25);
+        l8.setBounds(470,140,220,25);
     	jf.add(l8);
 
         t8 = new JTextField(20);
@@ -107,7 +107,7 @@ l5.setBounds(50,260,250,25);
 
 		l9 = new JLabel("Fish sale price");
 		//l9.setFont(f);
-  l9.setBounds(470,180,200,25);
+        l9.setBounds(470,180,200,25);
     	jf.add(l9);
 
         t9 = new JTextField(20);
@@ -116,7 +116,7 @@ l5.setBounds(50,260,250,25);
 
 		l10 = new JLabel("Fish rack no");
 		//l10.setFont(f);
-  	l10.setBounds(470,220,200,25);
+  	    l10.setBounds(470,220,200,25);
     	jf.add(l10);
 
         t10 = new JTextField(20);
@@ -263,7 +263,15 @@ public void actionPerformed(ActionEvent ae)
         t9.setText("");
         t10.setText("");
         t11.setText("");
-         con.close();
+        con.close();
+        //show
+               stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_UPDATABLE);
+               rs = stmt.executeQuery("SELECT * from fish" );
+               int r = 0;
+               while(rs.next())
+               {
+                   model.insertRow(r++, new Object[]{rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6),rs.getString(7),rs.getString(8),rs.getString(9),rs.getString(10),rs.getString(11),rs.getString(12) });
+               }
        }
         catch(SQLException se)
 		{
@@ -299,7 +307,7 @@ public void actionPerformed(ActionEvent ae)
      try
      {
          Class.forName("com.mysql.jdbc.Driver");
-		con=DriverManager.getConnection("jdbc:mysql://localhost:3306/fish_store","root","root");
+		con=DriverManager.getConnection("jdbc:mysql://localhost:3306/iwak_store","root","root");
 		System.out.println("Connected to database.");
 		stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_UPDATABLE);
         rs = stmt.executeQuery("SELECT * from fish" );

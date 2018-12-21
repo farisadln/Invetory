@@ -68,7 +68,7 @@ public class SupplierList extends JFrame
 
     jf.setTitle("Supplier List");
     jf.setSize(900,700);
-	 jf.setLocation(20,20);
+    jf.setLocation(20,20);
 	jf.setResizable(false);
     jf.getContentPane().setBackground(Color.pink);
     jf.setVisible(true);

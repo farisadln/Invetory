@@ -1,4 +1,5 @@
 package Iwak;
+
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
 import java.awt.*;
@@ -34,16 +35,7 @@ public class AddNewSupplier extends JFrame implements ActionListener
 	    l6.setBounds(250,50,300,40);l6.setForeground(Color.blue);
 	    jf.add(l6);
 
-	//	l1= new JLabel("Supplier id ");
-	//	l1.setFont(f);l1.setBounds(150,120,130,25);
-	//	jf.add(l1);
-
-	//	t1=new JTextField(20);t1.setEditable(false);
-	//	t1.setBounds(320,120,100,25);
-	//	jf.add(t1);
-
 		l2 = new JLabel("Supplier name*");
-		//l2.setFont(f);
         l2.setBounds(150,160,170,25);
 		jf.add(l2);
 
@@ -70,7 +62,6 @@ public class AddNewSupplier extends JFrame implements ActionListener
 		jf.add(t4);
 
 		l5 = new JLabel("Supplier email id*");
-		//l5.setFont(f);
         l5.setBounds(150,280,170,25);
 		jf.add(l5);
 
@@ -93,6 +84,7 @@ public class AddNewSupplier extends JFrame implements ActionListener
 	    scrlPane.setBounds(0,380,900,600);
         jf.add(scrlPane);
         tabGrid.setFont(new Font ("Times New Roman",0,15));
+
 
         model.addColumn("S_ID");
         model.addColumn("S_NAME");
@@ -139,15 +131,27 @@ public void actionPerformed(ActionEvent ae)
 		    ps.setString(3,t4.getText());
 			ps.setString(4,t5.getText());
 		  	ps.executeUpdate();
+		  	//show
+					 stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_UPDATABLE);
+					 rs = stmt.executeQuery("select * from supplier group by sid asc" );
+					 int r = 0;
+					 while(rs.next())
+					 {
+						 model.insertRow(r++, new Object[]{rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5) });
+					 }
+
 
   int reply=JOptionPane.showConfirmDialog(null,"Supplier added successfully.Do you want add more supplier?","Added Supplier",JOptionPane.YES_NO_OPTION);
 
-	             if (reply == JOptionPane.YES_OPTION)
-	   			{
-	   		       jf.setVisible(false);
-	   		       new AddNewSupplier();
-	   		    }
-	   		  else if (reply == JOptionPane.NO_OPTION)
+//	             if (reply == JOptionPane.YES_OPTION)
+//	   			{
+//
+//	   		       jf.setVisible(false);
+//	   		       new AddNewSupplier();
+////					tabGrid.setModel(model);
+//
+//	   		    }
+	   		  if (reply == JOptionPane.NO_OPTION)
 	   			{
 	   			  jf.setVisible(false);
 		        }con.close();
@@ -165,7 +169,7 @@ public void actionPerformed(ActionEvent ae)
  }
 }
   else if(ae.getSource()==b1)
-     {//clear
+  {
           //t1.setText("");
           t2.setText("");
           t3.setText("");
@@ -177,7 +181,7 @@ public void actionPerformed(ActionEvent ae)
   	int r = 0;
      try
      {
-         Class.forName("com.mysql.jdbc.Driver");
+     	Class.forName("com.mysql.jdbc.Driver");
 		con=DriverManager.getConnection("jdbc:mysql://localhost:3306/iwak_store","root","root");
 		System.out.println("Connected to database.");
 		stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_UPDATABLE);

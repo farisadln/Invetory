@@ -6,8 +6,7 @@ import javax.swing.table.DefaultTableModel;
 import java.sql.*;
 import java.sql.ResultSet;
 
-public class SearchFish extends JFrame implements ActionListener
-{
+public class SearchFish extends JFrame implements ActionListener {
 	JFrame jf;
 	JTextField t1,t2,t3,t4,t5,t6,t7,t8,t9,t10,t11,t12;
 	JLabel l1,l2,l3,l4,l5,l6,l7,l8,l9,l10,l11,l12,ln;
@@ -101,7 +100,7 @@ public class SearchFish extends JFrame implements ActionListener
 
 		l8= new JLabel("Fish purchase price");
 		//l8.setFont(f);
-   l8.setBounds(470,140,220,25);
+		l8.setBounds(470,140,220,25);
     	jf.add(l8);
 
         t8 = new JTextField(20);
